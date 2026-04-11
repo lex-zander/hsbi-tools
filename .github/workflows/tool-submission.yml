@@ -82,7 +82,7 @@ jobs:
           printf '%s' "$FRONTMATTER" > "src/content/tools/${SLUG}.md"
           git add "src/content/tools/${SLUG}.md"
           git commit -m "feat: add tool submission '${SLUG}' (issue #${{ github.event.issue.number }})"
-          git push origin "$BRANCH"
+          git push --force origin "$BRANCH"
 
       - name: Open pull request
         uses: actions/github-script@v7
