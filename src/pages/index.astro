@@ -1,17 +1,55 @@
 ---
+// components
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import Card from "../components/Card.astro"
 
+// content
+import { getCollection } from 'astro:content';
+
+// methods
+const allTools = await getCollection('tools');
+const sortedTools = allTools.sort((a, b) =>
+  b.data.addedAt.getTime() - a.data.addedAt.getTime()
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<DefaultLayout>	
+	<section class="flow span-content has-pb-3xl has-pt-m">
+		<h1 class="has-size-2">
+			Alle Tools auf einen Blick.
+		</h1>
+		<p class="has-size-5 has-max-width-5">
+			Hier findest du eine Sammlung an nützlichen Tools, Websites und Ressourcen die am Fachbereich genutzt werden.
+		</p>
+	</section>
+	<section class="subgrid span-content">
+		{sortedTools.map((tool) => (
+			<Card
+				title={tool.data.title}
+				description={tool.data.description}
+				url={tool.data.url}
+				author={tool.data.author}
+				status={tool.data.status}
+				tags={tool.data.tags}
+				audience={tool.data.audience}
+				internal={tool.data.internal}
+				addedAt={tool.data.addedAt.toDateString()}
+			/>
+		))}
+	</section>
+	<section class="subgrid span-full has-py-xl">
+		<div class="flow span-content has-items-center">
+			<h3 class="has-size-5 has-max-width-5 has-text-center">
+				Dir fehlt ein Tool? Oder du hast eins entwickelt und möchtest es mit allen teilen?
+			</h3>
+			<div class="flow-row has-justify-center has-gap-xs">
+				<a href="https://github.com/lex-zander/hsbi-tools/issues/new" class="button button--outline">
+					Problem melden
+				</a>
+				<a href="https://github.com/lex-zander/hsbi-tools/issues/new?template=tool-submission.yml" class="button is-primary">
+					Tool einreichen
+				</a>
+			</div>
+		</div>
+	</section>
+</DefaultLayout>

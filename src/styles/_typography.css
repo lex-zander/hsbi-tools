@@ -1,0 +1,25 @@
+.has-text-center {
+    p {
+        margin-inline: auto;
+    }
+}
+
+.has-text-right {
+    p {
+        margin-left: auto;
+    }
+}
+
+.has-color-accent {
+    color: var(--color-accent);
+}
+
+.has-color-neutral-800 {
+	color: var(--color-neutral-800);
+}
+
+.text {
+    p + p {
+        margin-top: var(--space-s);
+    }
+}

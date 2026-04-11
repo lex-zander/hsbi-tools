@@ -1,0 +1,88 @@
+---
+import type { Tool } from "../types/Tool";
+interface Props extends Tool {};
+
+const {
+  title,
+  url,
+  description,
+  author,
+  status,
+  tags,
+  audience,
+  internal,
+  addedAt,
+
+} = Astro.props;
+---
+
+<article class="card span-4">
+    <a 
+        class="card__link" 
+        href={url} 
+        target="_blank"
+        title={title} 
+        aria-label={title}>
+    </a>
+    <header class="card__header">
+        <div class="card__header__indicator"></div>
+        <h2 class="has-size-4 has-mt-xs">
+            {title}
+        </h2>
+    </header>
+    <div class="card__content has-mt-s">    
+        <p>
+            {description}
+        </p>
+    </div>
+    <footer class="card__footer">
+        <p class="has-size-7 has-color-neutral-800">
+            ins Leben gerufen von <strong>{author}</strong>
+        </p>
+    </footer>
+</article>
+
+<style>
+    .card {
+        aspect-ratio: 4/3;
+        background-color: var(--color-neutral-300);
+        border-radius: var(--border-radius);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding-inline:  var(--space-s) var(--space-xs);
+        padding-block: var(--space-xs);
+        position: relative;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &:focus {
+            background-color: var(--color-neutral-500);
+        }
+
+        .card__link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .card__header {
+            .card__header__indicator {
+                width: 0.5rem;
+                height: 0.5rem;
+                background-color: var(--color-accent);
+                border-radius: 50%;
+                margin-left: auto;
+            }
+        }
+
+        .card__footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: auto;
+        }
+    }
+</style>
