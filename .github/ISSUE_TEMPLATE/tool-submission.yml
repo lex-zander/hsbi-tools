@@ -1,0 +1,76 @@
+name: Tool einreichen
+description: Schlage ein neues Tool für die HSBI-Tools-Sammlung vor.
+title: "[Tool] "
+labels: ["tool-submission"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Name des Tools
+      placeholder: z.B. "VVZauberer"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung
+      description: Kurze Beschreibung, was das Tool macht.
+      placeholder: Dieses Tool...
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Autor / Autorin
+      placeholder: z.B. "Alex T."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - live
+        - wip
+        - down
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Zielgruppe
+      options:
+        - students
+        - staff
+        - both
+    validations:
+      required: true
+
+  - type: dropdown
+    id: internal
+    attributes:
+      label: Intern (nur HSBI-Netz)?
+      options:
+        - "false"
+        - "true"
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Kommagetrennte Liste, kann auch leer bleiben.
+      placeholder: "typografie, layout, ki"
