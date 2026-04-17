@@ -8,4 +8,10 @@ import '../styles/main.css';
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Tools – Fachbereich Gestaltung der HSBI</title>
+    <meta name="description" content="Eine Sammlung von Tools, die von Studierenden und Lehrenden des Fachbereichs Gestaltung der Hochschule Bremen genutzt werden." />
+    <script is:inline>
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    </script>
 </head>

@@ -1,0 +1,68 @@
+---
+---
+
+<script>
+    const themeBtn = document.getElementById('theme-toggle')!;
+
+    // Sync theme button with current theme (already set by Head.astro inline script)
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    themeBtn.setAttribute('data-theme', currentTheme);
+    themeBtn.setAttribute('aria-label', currentTheme === 'dark' ? 'Hellmodus' : 'Dunkelmodus');
+    themeBtn.setAttribute('title', currentTheme === 'dark' ? 'Hellmodus' : 'Dunkelmodus');
+
+    // Theme toggle
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        themeBtn.setAttribute('data-theme', next);
+        themeBtn.setAttribute('aria-label', next === 'dark' ? 'Hellmodus' : 'Dunkelmodus');
+        themeBtn.setAttribute('title', next === 'dark' ? 'Hellmodus' : 'Dunkelmodus');
+        localStorage.setItem('theme', next);
+    });
+</script>
+
+<div class="toolbar span-content has-pb-s">
+    <button class="icon-button" id="theme-toggle" data-theme="light" aria-label="Dunkelmodus" title="Dunkelmodus">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+</div>
+
+<style>
+	.toolbar {
+		display: flex;
+		justify-content: flex-end;
+		gap: var(--space-xs);
+	}
+
+	.icon-button {
+		background: none;
+		border: 1px solid var(--color-neutral-300);
+		cursor: pointer;
+		color: var(--color-base);
+		padding: var(--space-2xs);
+		border-radius: var(--border-radius);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--color-neutral-200);
+			border-color: var(--color-neutral-400);
+		}
+	}
+
+	/* View toggle: show grid icon when in grid mode, list icon when in list mode */
+	#view-toggle[data-view="grid"] .icon-list { display: none; }
+	#view-toggle[data-view="list"] .icon-grid { display: none; }
+
+	/* Theme toggle: show moon when light (click to go dark), sun when dark (click to go light) */
+	#theme-toggle[data-theme="light"] .icon-sun { display: none; }
+	#theme-toggle[data-theme="dark"] .icon-moon { display: none; }
+</style>
