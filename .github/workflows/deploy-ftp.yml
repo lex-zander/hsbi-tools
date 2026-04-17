@@ -34,10 +34,10 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: v2202511242415400947.hotsrv.de
+          username: dmxmicrosite
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          
+          server-dir: /home/users/dmxmicrosite/www/tools.hsbi-gestaltung.de/
+
 
