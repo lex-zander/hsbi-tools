@@ -15,7 +15,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,10 +34,10 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: v2202511242415400947.hotsrv.de
-          username: dmxmicrosite
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: /home/users/dmxmicrosite/www/tools.hsbi-gestaltung.de/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
 
 
