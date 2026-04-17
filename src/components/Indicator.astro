@@ -1,0 +1,28 @@
+---
+
+const { status = 'live' } = Astro.props;
+
+---
+
+<div class="status" class:list={[
+    status === 'live' ? 'status--is-live' : 'status--is-down'
+]}>
+
+</div>
+
+<style>
+    .status {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: var(--color-accent);
+        border-radius: 50%;
+
+        &.status--is-live {
+            background-color: var(--color-success);
+        }
+
+        &.status--is-down {
+            background-color: var(--color-error);
+        }
+    }
+</style>

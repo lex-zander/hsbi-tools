@@ -1,35 +1,40 @@
 ---
 // components
 import DefaultLayout from '../layouts/DefaultLayout.astro';
+import Toolbar from '../components/toolbar.astro';
 import Card from "../components/Card.astro"
 
 // content
 import { getCollection } from 'astro:content';
+import statusData from '../data/status.json';
 
 // methods
 const allTools = await getCollection('tools');
 const sortedTools = allTools.sort((a, b) =>
-  b.data.addedAt.getTime() - a.data.addedAt.getTime()
+  b.data.title - a.data.title
 );
+
+function resolveStatus(id: string, fallback: string) {
+  const liveCheck = statusData[id]
+  if (!liveCheck) return fallback
+  return liveCheck.statusCode !== null && liveCheck.statusCode >= 200 && liveCheck.statusCode < 300 ? 'live' : 'down'
+}
 ---
 
-<DefaultLayout>	
-	<section class="flow span-content has-pb-3xl has-pt-m">
-		<h1 class="has-size-2">
-			Alle Tools auf einen Blick.
-		</h1>
-		<p class="has-size-5 has-max-width-5">
-			Hier findest du eine Sammlung an nützlichen Tools, Websites und Ressourcen die am Fachbereich genutzt werden.
+<DefaultLayout>
+	<section class="flow span-content has-pb-xl has-pt-s">
+		<p class="has-size-3 has-text-balance has-max-width-5">
+			Hier findest du eine Sammlung an nützlichen <span class="has-color-accent">Tools, Websites & Ressourcen</span> die am Fachbereich genutzt werden.
 		</p>
 	</section>
-	<section class="subgrid span-content">
+	<section class="subgrid has-items-stretch span-content" id="tools-grid">
 		{sortedTools.map((tool) => (
 			<Card
 				title={tool.data.title}
 				description={tool.data.description}
 				url={tool.data.url}
 				author={tool.data.author}
-				status={tool.data.status}
+				status={resolveStatus(tool.id, tool.data.status)}
 				tags={tool.data.tags}
 				audience={tool.data.audience}
 				internal={tool.data.internal}
@@ -37,15 +42,15 @@ const sortedTools = allTools.sort((a, b) =>
 			/>
 		))}
 	</section>
-	<section class="subgrid span-full has-py-xl">
+	<section class="subgrid span-full has-py-2xl has-mt-xl">
 		<div class="flow span-content has-items-center">
-			<h3 class="has-size-5 has-max-width-5 has-text-center">
-				Dir fehlt ein Tool? Oder du hast eins entwickelt und möchtest es mit allen teilen?
+			<h3 class="has-size-3 has-max-width-5 has-text-center">
+				Hier fehlt ein Tool?
 			</h3>
-			<div class="flow-row has-justify-center has-gap-xs">
-				<a href="https://github.com/lex-zander/hsbi-tools/issues/new" target="_blank" class="button button--outline">
-					Problem melden
-				</a>
+			<p class="has-size-5 has-text-center has-max-width-6">
+				Reiche jetzt dein von dir entwickeltes Tool ein oder verweise auf diese Seite, damit andere Nutzer:innen fehlende Tools melden können.
+			</p>
+			<div class="flow-row has-justify-center has-gap-xs has-mt-s">
 				<a href="https://github.com/lex-zander/hsbi-tools/issues/new?template=tool-submission.yml" target="_blank" class="button is-primary">
 					Tool einreichen
 				</a>

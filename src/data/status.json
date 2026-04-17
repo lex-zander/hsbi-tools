@@ -1,0 +1,14 @@
+{
+  "hsbi-gpt": {
+    "statusCode": 200,
+    "checkedAt": "2026-04-15T08:00:00Z"
+  },
+  "vvzauberer": {
+    "statusCode": 503,
+    "checkedAt": "2026-04-15T08:00:00Z"
+  },
+  "picture-tool-motion": {
+    "statusCode": null,
+    "checkedAt": "2026-04-15T08:00:00Z"
+  }
+}

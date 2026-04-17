@@ -1,0 +1,48 @@
+---
+// components
+import Indicator from './Indicator.astro';
+
+import statusData from '../data/status.json';
+
+// methods
+const lastChecked = Object.values(statusData)
+  .map(v => v.checkedAt)
+  .filter(Boolean)
+  .sort()
+  .at(-1);
+
+const formatted = lastChecked
+  ? new Date(lastChecked).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  : '—';
+---
+
+<header class="subgrid span-full has-py-s">
+    <div class="flow-row span-content has-justify-space-between">
+        <a href="/">
+            <h1 class="has-size-4 has-text-wrap has-max-width-6">
+                <div class="flow-row has-gap-0">
+                    HSB
+                    <span class="has-color-neutral-400">
+                        U
+                    </span>
+                    I
+                    <span class="has-color-neutral-400">
+                        LD
+                    </span>
+                </div>
+            </h1>
+        </a>
+        <div class="flow-row has-gap-xs has-items-center has-justify-end">
+            <Indicator />
+            <p class="has-size-8 has-text-uppercase has-color-neutral-700">
+                zuletzt aktualisiert {formatted}
+            </p>
+        </div>
+    </div>
+</header>

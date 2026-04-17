@@ -1,7 +1,8 @@
 ---
-import type { Tool } from "../types/Tool";
-interface Props extends Tool {};
+// components
+import Indicator from "./Indicator.astro";
 
+// props
 const {
   title,
   url,
@@ -12,77 +13,88 @@ const {
   audience,
   internal,
   addedAt,
-
 } = Astro.props;
 ---
 
-<article class="card span-4">
-    <a 
-        class="card__link" 
-        href={url} 
+<article class="card span-6">
+    <a
+        class="card__link"
+        href={url}
         target="_blank"
-        title={title} 
+        title={title}
         aria-label={title}>
     </a>
     <header class="card__header">
-        <div class="card__header__indicator"></div>
-        <h2 class="has-size-4 has-mt-xs">
-            {title}
-        </h2>
+        <div class="card__header__indicator">
+            <Indicator
+                {status}
+            />
+        </div>
+        <h2>{title}</h2>
     </header>
-    <div class="card__content has-mt-s">    
-        <p>
-            {description}
-        </p>
+    <div class="card__content">
+        <p>{description}</p>
     </div>
     <footer class="card__footer">
-        <p class="has-size-7 has-color-neutral-800">
-            ins Leben gerufen von <strong>{author}</strong>
-        </p>
+        <p>entwickelt von <strong>{author}</strong></p>
     </footer>
 </article>
 
 <style>
     .card {
-        aspect-ratio: 4/3;
-        background-color: var(--color-neutral-300);
+        aspect-ratio: 16/9;
+        background-color: var(--color-neutral-200);
         border-radius: var(--border-radius);
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
-        padding-inline:  var(--space-s) var(--space-xs);
+        padding-inline: var(--space-s);
         padding-block: var(--space-xs);
         position: relative;
-        transition: all 0.3s ease;
+        transition: background-color 0.3s ease;
 
         &:hover,
         &:focus {
-            background-color: var(--color-neutral-500);
+            background-color: var(--color-neutral-300);
         }
 
         .card__link {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
+            inset: 0;
         }
 
         .card__header {
             .card__header__indicator {
-                width: 0.5rem;
-                height: 0.5rem;
-                background-color: var(--color-accent);
-                border-radius: 50%;
-                margin-left: auto;
+                position: absolute;
+                top: 0.5em;
+                right: 0.5em;
+            }
+
+            h2 {
+                font-size: var(--font-size-5);
+                margin-top: var(--space-xs);
+            }
+        }
+
+        .card__content {
+            flex: 1;
+            margin-top: var(--space-xs);
+
+            p {
+                font-size: var(--font-size-6);
             }
         }
 
         .card__footer {
+            border-top: 1px solid var(--color-neutral-400);
             display: flex;
             justify-content: flex-end;
-            margin-top: auto;
+            margin-top: var(--space-l);
+            padding-top: var(--space-xs);
+
+            p {
+                font-size: var(--font-size-8);
+                color: var(--color-neutral-800);
+            }
         }
     }
 </style>
