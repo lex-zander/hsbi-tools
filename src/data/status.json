@@ -1,22 +1,22 @@
 {
   "picture-tool-motion": {
     "statusCode": 200,
-    "checkedAt": "2026-04-17T13:00:58.325Z"
+    "checkedAt": "2026-04-17T13:04:27.411Z"
   },
   "curahub": {
     "statusCode": 200,
-    "checkedAt": "2026-04-17T13:00:58.325Z"
+    "checkedAt": "2026-04-17T13:04:27.411Z"
   },
   "hsbi-gpt": {
     "statusCode": 200,
-    "checkedAt": "2026-04-17T13:00:58.325Z"
+    "checkedAt": "2026-04-17T13:04:27.411Z"
   },
   "vvzauberer": {
     "statusCode": 200,
-    "checkedAt": "2026-04-17T13:00:58.325Z"
+    "checkedAt": "2026-04-17T13:04:27.411Z"
   },
   "vvz": {
     "statusCode": null,
-    "checkedAt": "2026-04-17T13:00:58.325Z"
+    "checkedAt": "2026-04-17T13:04:27.411Z"
   }
 }
