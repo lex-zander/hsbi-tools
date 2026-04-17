@@ -1,3 +1,11 @@
 :root {
     --grid-width: 100%;
 }
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+}

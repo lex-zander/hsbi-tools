@@ -1,0 +1,11 @@
+:root {
+    --button-border-radius: var(--border-radius-rounded);
+    --button-border-width: 2px;
+    --button-padding-block: 0.125em;
+    --button-padding-inline: 0.75em;
+}
+
+.button {
+    position: relative;
+    overflow: visible;
+}

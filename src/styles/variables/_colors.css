@@ -1,0 +1,7 @@
+:root {
+    --color-accent-h: 240;
+    --color-accent-c: 0.40;
+    --color-accent-l: 0.50;
+    --color-accent: oklch(var(--color-accent-l) var(--color-accent-c) var(--color-accent-h));
+    --color-accent-invert: var(--color-neutral-0);
+}

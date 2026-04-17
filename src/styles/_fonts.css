@@ -1,0 +1,34 @@
+/* Saol Display */
+@font-face {
+    font-display: swap;
+    font-family: 'Saol Display';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/SaolDisplay-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Saol Display';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/SaolDisplay-BoldItalic.woff2') format('woff2');
+}
+
+/* Suisse Intl */
+@font-face {
+    font-display: swap;
+    font-family: 'Suisse Intl';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/SuisseIntl-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Suisse Intl';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/SuisseIntl-Regular.woff2') format('woff2');
+}
+

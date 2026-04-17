@@ -1,0 +1,11 @@
+:root {
+    --font-family: 'Suisse Intl';
+    --font-family-accent: 'Saol Display';
+
+    --font-family-title: var(--font-family);
+    --line-height-title: 1;
+    --line-height: 1.3;
+    --font-weight-title: 700;
+
+    --font-weight-bold: 700;
+}
