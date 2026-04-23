@@ -1,9 +1,6 @@
 name: Deploy via FTP
 
 on:
-  push:
-    branches:
-      - prod
   workflow_run:
     workflows: ["Check tool status"]
     branches:
@@ -15,7 +12,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v4
         with:
