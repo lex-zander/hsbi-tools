@@ -30,16 +30,26 @@ jobs:
               return m ? m[1].trim() : '';
             }
 
-            const title       = field('Name des Tools');
+            // Title comes from the issue title, not a separate body field
+            const title       = context.payload.issue.title.replace(/^\[Tool\]\s*/, '').trim();
             const url         = field('URL');
             const description = field('Beschreibung');
-            const author      = field('Autor / Autorin');
-            const status      = field('Status');
-            const audience    = field('Zielgruppe');
-            const internalRaw = field('Intern \\(nur HSBI-Netz\\)?');
-            const tagsRaw     = field('Tags');
+            const author      = field('Autor \\/ Autorin');
+            const tagsRaw     = field('Kategorien');
 
-            const internal = internalRaw === 'true' ? 'true' : 'false';
+            // Map German audience labels to schema values
+            const audienceRaw = field('Zielgruppe');
+            const audienceMap = {
+              'Student*innen':     'students',
+              'Mitarbeiter*innen': 'staff',
+              'Beide':             'both',
+            };
+            const audience = audienceMap[audienceRaw] ?? 'both';
+
+            // Map Ja/Nein to boolean
+            const internalRaw = field('Nur im HSBI-Netz erreichbar\\?');
+            const internal = internalRaw === 'Ja' ? 'true' : 'false';
+
             const tags = tagsRaw
               ? tagsRaw.split(',').map(t => `"${t.trim()}"`).join(', ')
               : '';
@@ -57,7 +67,7 @@ jobs:
               `url: "${url}"`,
               `description: "${description.replace(/"/g, '\\"')}"`,
               `author: "${author}"`,
-              `status: "${status}"`,
+              `status: "wip"`,
               `tags: [${tags}]`,
               `audience: "${audience}"`,
               `internal: ${internal}`,
@@ -90,7 +100,6 @@ jobs:
           script: |
             const issue   = context.payload.issue;
             const branch  = '${{ steps.parse.outputs.branch }}';
-            const slug    = '${{ steps.parse.outputs.slug }}';
 
             const { data: pr } = await github.rest.pulls.create({
               owner: context.repo.owner,

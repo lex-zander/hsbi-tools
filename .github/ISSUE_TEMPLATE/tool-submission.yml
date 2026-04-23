@@ -1,21 +1,31 @@
 name: Tool einreichen
 description: Schlage ein neues Tool für die HSBI-Tools-Sammlung vor.
-title: "[Tool] "
+title: "[Tool] Name des Tools"
 labels: ["tool-submission"]
 body:
-  - type: input
-    id: title
+  - type: markdown
     attributes:
-      label: Name des Tools
-      placeholder: z.B. "VVZauberer"
-    validations:
-      required: true
+      value: |
+        ## Tool einreichen
+        Fülle das Formular aus, um ein neues Tool vorzuschlagen. Der PR wird automatisch erstellt.
+
+  - type: markdown
+    attributes:
+      value: "### Allgemeine Informationen"
 
   - type: input
     id: url
     attributes:
       label: URL
       placeholder: https://...
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Autor / Autorin
+      placeholder: z.B. "Alex T."
     validations:
       required: true
 
@@ -28,49 +38,35 @@ body:
     validations:
       required: true
 
-  - type: input
-    id: author
+  - type: markdown
     attributes:
-      label: Autor / Autorin
-      placeholder: z.B. "Alex T."
-    validations:
-      required: true
-
-  - type: dropdown
-    id: status
-    attributes:
-      label: Status
-      options:
-        - live
-        - wip
-        - down
-    validations:
-      required: true
+      value: "### Einordnung"
 
   - type: dropdown
     id: audience
     attributes:
       label: Zielgruppe
       options:
-        - students
-        - staff
-        - both
-    validations:
-      required: true
-
-  - type: dropdown
-    id: internal
-    attributes:
-      label: Intern (nur HSBI-Netz)?
-      options:
-        - "false"
-        - "true"
+        - Student*innen
+        - Mitarbeiter*innen
+        - Beide
     validations:
       required: true
 
   - type: input
     id: tags
     attributes:
-      label: Tags
+      label: Kategorien
       description: Kommagetrennte Liste, kann auch leer bleiben.
       placeholder: "typografie, layout, ki"
+
+  - type: dropdown
+    id: internal
+    attributes:
+      label: Nur im HSBI-Netz erreichbar?
+      description: Ist das Tool nur im internen HSBI-Netz oder per VPN erreichbar?
+      options:
+        - "Nein"
+        - "Ja"
+    validations:
+      required: true
