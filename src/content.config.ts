@@ -10,7 +10,7 @@ const tools = defineCollection({
     description: z.string(),
     url: z.string().url(),
     author: z.string(),
-    status: z.enum(['live', 'down', 'wip']),
+    status: z.enum(['live', 'down']),
     tags: z.array(z.string()),
     audience: z.enum(['students', 'staff', 'both']),
     internal: z.boolean(),

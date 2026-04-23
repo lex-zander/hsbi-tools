@@ -14,14 +14,14 @@ const { title } = Astro.props;
   <body>
     <div class="grid">
       <Header />
-      <main class="subgrid span-full">
-          <div class="flow span-content span-8:l">
+      <main class="subgrid span-content">
+          <div class="flow span-full span-8:l">
             <div class="text">
               <slot />
             </div>
           </div>
-        <Footer />
-      </main>
+        </main>
+      <Footer />
     </div>
   </body>
 </html>
