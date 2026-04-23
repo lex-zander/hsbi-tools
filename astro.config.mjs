@@ -6,6 +6,11 @@ export default defineConfig({
     vite: {
         css: {
             transformer: "lightningcss",
+            lightningcss: {
+                drafts: {
+                    customMedia: true,
+                },
+            },
         },
     },
 });

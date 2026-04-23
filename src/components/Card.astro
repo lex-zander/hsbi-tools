@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="card span-6">
+<article class="card span-full span-6:m ">
     <a
         class="card__link"
         href={url}
@@ -43,6 +43,7 @@ const {
 <style>
     .card {
         aspect-ratio: 16/9;
+        width: 100%;
         background-color: var(--color-neutral-200);
         border-radius: var(--border-radius);
         display: flex;
