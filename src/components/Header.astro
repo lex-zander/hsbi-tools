@@ -22,27 +22,63 @@ const formatted = lastChecked
   : '—';
 ---
 
-<header class="subgrid span-full has-py-s">
-    <div class="flow-row span-content has-justify-space-between">
-        <a href="/">
-            <h1 class="has-size-4 has-text-wrap has-max-width-6">
-                <div class="flow-row has-gap-0">
-                    HSB
-                    <span class="has-color-neutral-400">
-                        U
-                    </span>
-                    I
-                    <span class="has-color-neutral-400">
-                        LD
-                    </span>
-                </div>
-            </h1>
-        </a>
-        <div class="flow-row has-gap-xs has-items-center has-justify-end">
-            <Indicator />
-            <p class="has-size-8 has-text-uppercase has-color-neutral-700">
-                zuletzt aktualisiert {formatted}
-            </p>
-        </div>
+<header class="header">
+    <a href="/" class="header__logo">
+        <h1 class="has-text-wrap has-max-width-6">
+            <div class="flow-row has-gap-0">
+                HSB
+                <span class="has-color-neutral-400">
+                    U
+                </span>
+                I
+                <span class="has-color-neutral-400">
+                    LD
+                </span>
+            </div>
+        </h1>
+    </a>
+    <div class="header__indicator">
+        <Indicator />
+        <p class="has-size-8 has-text-uppercase has-color-neutral-700 has-ml-xs">
+            zuletzt aktualisiert {formatted}
+        </p>
     </div>
 </header>
+
+<style>
+@import "cleacss/media-queries";
+
+    .header {
+        display: flex;
+        flex-direction: column-reverse;
+        grid-column: 2/-2;
+        padding-block: var(--space-m);
+
+        .header__logo {
+            margin-top: var(--space-s);
+
+            @media(--m) {
+                margin-top: 0;
+            }
+
+            h1 {
+                font-size: var(--font-size-2);
+
+                @media(--m) {
+                    font-size: var(--font-size-3);
+                }
+            }
+
+        }
+
+        @media(--m) {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .header__indicator {
+            display: flex;
+            align-items: center;
+        }
+    }
+</style>
