@@ -24,5 +24,8 @@
     "Firefox ESR",
     "not op_mini all",
     "not and_uc > 0"
-  ]
+  ],
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
 }

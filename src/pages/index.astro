@@ -39,6 +39,7 @@ function resolveStatus(id: string, fallback: string) {
 				audience={tool.data.audience}
 				internal={tool.data.internal}
 				addedAt={tool.data.addedAt.toDateString()}
+				screenshot={`/screenshots/${tool.id}.jpg`}
 			/>
 		))}
 	</section>
@@ -48,7 +49,7 @@ function resolveStatus(id: string, fallback: string) {
 				Hier fehlt ein Tool?
 			</h3>
 			<p class="has-size-5 has-text-center has-max-width-6">
-				Reiche jetzt dein von dir entwickeltes Tool ein oder verweise auf diese Seite, damit andere Nutzer:innen fehlende Tools melden können.
+				Reiche jetzt dein von dir entwickeltes Tool ein oder verweise auf diese Seite, damit andere Nutzer*innen fehlende Tools melden können.
 			</p>
 			<div class="flow-row has-justify-center has-gap-xs has-mt-s">
 				<a href="https://github.com/lex-zander/hsbi-tools/issues/new?template=tool-submission.yml" target="_blank" class="button is-primary">
