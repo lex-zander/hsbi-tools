@@ -40,7 +40,7 @@ export default function screenshotsIntegration() {
 
         logger.info(`Generating screenshots for ${tools.length} tools...`);
 
-        const browser = await chromium.launch();
+        let browser = null;
 
         for (const { id, url } of tools) {
           const outPath = join(screenshotsDir, `${id}.jpg`);
@@ -54,6 +54,7 @@ export default function screenshotsIntegration() {
           }
 
           try {
+            if (!browser) browser = await chromium.launch();
             const page = await browser.newPage();
             await page.setViewportSize({ width: 1280, height: 720 });
             await page.goto(url, { waitUntil: 'load', timeout: 12000 });
@@ -65,7 +66,7 @@ export default function screenshotsIntegration() {
           }
         }
 
-        await browser.close();
+        if (browser) await browser.close();
         logger.info('Screenshots done.');
       },
     },
