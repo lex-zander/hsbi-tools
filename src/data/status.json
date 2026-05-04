@@ -1,26 +1,26 @@
 {
   "picture-tool-motion": {
     "statusCode": 200,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   },
   "curahub": {
     "statusCode": 200,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   },
   "hsbi-gpt": {
     "statusCode": 200,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   },
   "vvzauberer": {
     "statusCode": 200,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   },
   "vvz": {
     "statusCode": null,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   },
   "video-wall": {
     "statusCode": 200,
-    "checkedAt": "2026-05-04T07:43:30.123Z"
+    "checkedAt": "2026-05-04T07:48:25.617Z"
   }
 }
