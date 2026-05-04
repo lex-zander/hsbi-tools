@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="card span-full span-6:m" style={screenshot ? `--screenshot: url('${screenshot}')` : ''}>
+<article class="card span-6" style={screenshot ? `--screenshot: url('${screenshot}')` : ''}>
     <a
         class="card__link"
         href={url}
@@ -44,20 +44,18 @@ const {
 <style>
     .card {
         aspect-ratio: 16/9;
-        width: 100%;
         background-color: var(--color-neutral-200);
         background-image:
-            linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent 30%,
-                color-mix(in srgb, var(--color-neutral-200) 85%, transparent) 62%,
-                var(--color-neutral-200) 78%
-            ),
-            var(--screenshot, none);
+        linear-gradient(
+            to top,
+            var(--color-neutral-200) 0%,
+            transparent 65%
+        ),
+        var(--screenshot, none);
         background-size: cover;
         background-position: center top;
         border-radius: var(--border-radius);
+        color: var(--color-white);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -68,7 +66,7 @@ const {
 
         &:hover,
         &:focus {
-            background-color: var(--color-neutral-300);
+            background-color: var(--color-neutral-800);
         }
 
         .card__link {
@@ -97,7 +95,7 @@ const {
         }
 
         .card__footer {
-            border-top: 1px solid var(--color-neutral-400);
+            border-top: 1px solid color-mix(in srgb, var(--color-white) 20%, transparent);
             display: flex;
             justify-content: flex-end;
             margin-top: var(--space-xs);
@@ -105,7 +103,7 @@ const {
 
             p {
                 font-size: var(--font-size-8);
-                color: var(--color-neutral-800);
+                color: color-mix(in srgb, var(--color-white) 60%, transparent);
             }
         }
     }

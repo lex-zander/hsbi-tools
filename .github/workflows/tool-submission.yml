@@ -67,7 +67,7 @@ jobs:
               `url: "${url}"`,
               `description: "${description.replace(/"/g, '\\"')}"`,
               `author: "${author}"`,
-              `status: "wip"`,
+              `status: "down"`,
               `tags: [${tags}]`,
               `audience: "${audience}"`,
               `internal: ${internal}`,
