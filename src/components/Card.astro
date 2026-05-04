@@ -44,14 +44,14 @@ const {
 <style>
     .card {
         aspect-ratio: 16/9;
-        background-color: var(--color-neutral-200);
+        background-color: oklch(0.08 0.01 var(--color-accent-h));
         background-image:
-        linear-gradient(
-            to top,
-            var(--color-neutral-200) 0%,
-            transparent 65%
-        ),
-        var(--screenshot, none);
+            linear-gradient(
+                to top,
+                oklch(0.08 0.01 var(--color-accent-h)) 0%,
+                transparent 65%
+            ),
+            var(--screenshot, none);
         background-size: cover;
         background-position: center top;
         border-radius: var(--border-radius);
@@ -62,11 +62,14 @@ const {
         padding-inline: var(--space-s);
         padding-block: var(--space-xs);
         position: relative;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
         &:hover,
         &:focus {
-            background-color: var(--color-neutral-800);
+            background-color: oklch(0.12 0.01 var(--color-accent-h));
+            box-shadow:
+                0 0 0 1px color-mix(in srgb, var(--color-accent) 60%, transparent),
+                0 0 24px color-mix(in srgb, var(--color-accent) 35%, transparent);
         }
 
         .card__link {
