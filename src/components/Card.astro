@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="card span-6" style={screenshot ? `--screenshot: url('${screenshot}')` : ''}>
+<article class="card span-full span-6:l" style={screenshot ? `--screenshot: url('${screenshot}')` : ''}>
     <a
         class="card__link"
         href={url}
@@ -42,14 +42,16 @@ const {
 </article>
 
 <style>
+@import "cleacss/media-queries";
+
     .card {
-        aspect-ratio: 16/9;
+        aspect-ratio: 3/4;
+        width: 100%;
         background-color: oklch(0.08 0.01 var(--color-accent-h));
         background-image:
             linear-gradient(
-                to top,
-                oklch(0.08 0.01 var(--color-accent-h)) 0%,
-                transparent 65%
+                color-mix(in srgb, oklch(0.08 0.01 var(--color-accent-h)) 55%, transparent),
+                color-mix(in srgb, oklch(0.08 0.01 var(--color-accent-h)) 55%, transparent)
             ),
             var(--screenshot, none);
         background-size: cover;
@@ -64,9 +66,19 @@ const {
         position: relative;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
+        @media(--m) {
+            aspect-ratio: 16/9;
+            background-image:
+                linear-gradient(
+                    to top,
+                    oklch(0.08 0.01 var(--color-accent-h)) 0%,
+                    transparent 65%
+                ),
+                var(--screenshot, none);
+        }
+
         &:hover,
         &:focus {
-            background-color: oklch(0.12 0.01 var(--color-accent-h));
             box-shadow:
                 0 0 0 1px color-mix(in srgb, var(--color-accent) 60%, transparent),
                 0 0 24px color-mix(in srgb, var(--color-accent) 35%, transparent);
