@@ -1,0 +1,63 @@
+name: Deploy
+
+# The host serves SSH/SFTP only — FTP (21) and implicit FTPS (990) are closed,
+# so the old FTP action could never connect ("Timeout (control socket)").
+# The deploy account has no shell, which rules out rsync/scp; SFTP is a
+# subsystem and works without one, which is how FileZilla connects.
+on:
+  workflow_run:
+    workflows: ["Refresh tool data"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag or commit SHA to deploy (rollback: pass an older SHA)'
+        type: string
+        default: main
+      dry_run:
+        description: 'Only report what would be uploaded — change nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # `inputs` is null for workflow_run, so fall back to main
+          ref: ${{ inputs.ref || 'main' }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy via SFTP
+        uses: Dylan700/sftp-upload-action@v1.2.5
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          # FileZilla connects on the SFTP default. 2222 also answers SSH on
+          # this host, so SFTP_PORT can override if 22 ever refuses the account.
+          port: ${{ secrets.SFTP_PORT || '22' }}
+          uploads: |
+            ./dist/ => ${{ secrets.SFTP_TARGET_DIR }}
+          # `delete: true` clears the whole remote directory first, which would
+          # take _backup/ and dmxrustdesk/ with it. Old hashed files in _astro/
+          # accumulate instead — harmless, and prunable by hand later.
+          delete: false
+          dry-run: ${{ inputs.dry_run || false }}
