@@ -17,11 +17,11 @@ pnpm-debug.log*
 .env
 .env.production
 
-# generated screenshots
-public/screenshots/
-
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# apache basic-auth file, never commit
+public/.htpasswd
