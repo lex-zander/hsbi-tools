@@ -1,32 +1,44 @@
 name: Deploy via FTP
 
 on:
+  # NOTE: no `branches` filter here. It would match the branch the *triggering*
+  # workflow ran on, and scheduled runs always report the default branch — which
+  # is why this deploy never fired after a scheduled status check.
   workflow_run:
-    workflows: ["Check tool status"]
-    branches:
-      - prod
+    workflows: ["Refresh tool data"]
     types:
       - completed
+  # Rollback: dispatch this workflow with an older commit SHA or tag. The action
+  # diffs against its server state file, so it restores that exact state —
+  # including removing files a bad deploy added.
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag or commit SHA to deploy'
+        type: string
+        default: main
+
+concurrency:
+  group: deploy-ftp
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: prod
+          # `inputs` is null for workflow_run, so fall back to main
+          ref: ${{ inputs.ref || 'main' }}
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -40,5 +52,3 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           port: 443
-
-
