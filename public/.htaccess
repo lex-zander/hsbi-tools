@@ -1,9 +1,3 @@
-# 
-AuthType Basic
-AuthName "hsbi"
-AuthUserFile .htpasswd
-Require valid-user
-
 # Redirect www to non-www
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
