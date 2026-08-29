@@ -1,34 +1,64 @@
-name: Check tool status
+name: Refresh tool data
 
+# Runs on every push to main (i.e. every merged tool submission) and twice a
+# week on a schedule. Commits the results back to main, which is what the
+# deploy workflow waits for.
 on:
   schedule:
     - cron: '0 8 * * 1,4' # Monday and Thursday at 08:00 UTC
   push:
     branches:
-      - prod
+      - main
   workflow_dispatch:
+    inputs:
+      force_screenshots:
+        description: 'Re-take every screenshot instead of only the missing ones'
+        type: boolean
+        default: false
+
+concurrency:
+  group: refresh-tool-data
+  cancel-in-progress: false
 
 jobs:
-  check-status:
+  refresh:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: prod
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install chromium --with-deps
 
       - name: Check tool availability
         run: node scripts/check-status.mjs
 
-      - name: Commit status update
+      - name: Generate missing screenshots
+        env:
+          SCREENSHOTS_FORCE: ${{ inputs.force_screenshots && '1' || '0' }}
+        run: npm run screenshots
+
+      - name: Commit status and screenshot updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/status.json
-          git diff --cached --quiet || git commit -m "chore: update tool status"
-          git push
+          git add src/data/status.json public/screenshots
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: update tool status and screenshots"
+          # main may have moved while the checks were running
+          git pull --rebase origin main
+          git push origin HEAD:main

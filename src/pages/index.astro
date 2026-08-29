@@ -11,12 +11,14 @@ import statusData from '../data/status.json';
 // methods
 const allTools = await getCollection('tools');
 const sortedTools = allTools.sort((a, b) =>
-  b.data.title - a.data.title
+  a.data.title.localeCompare(b.data.title, 'de')
 );
 
 function resolveStatus(id: string, fallback: string) {
   const liveCheck = statusData[id]
-  if (!liveCheck) return fallback
+  // Internal tools are skipped by the check — a runner cannot reach the HSBI
+  // net, so fall back to what the tool file declares.
+  if (!liveCheck || liveCheck.skipped) return fallback
   return liveCheck.statusCode !== null && liveCheck.statusCode >= 200 && liveCheck.statusCode < 300 ? 'live' : 'down'
 }
 ---

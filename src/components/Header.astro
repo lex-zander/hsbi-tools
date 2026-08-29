@@ -12,12 +12,14 @@ const lastChecked = Object.values(statusData)
   .at(-1);
 
 const formatted = lastChecked
+  // The build runs on a UTC runner, so pin the zone instead of inheriting it.
   ? new Date(lastChecked).toLocaleDateString('de-DE', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      timeZone: 'Europe/Berlin',
     })
   : '—';
 ---
