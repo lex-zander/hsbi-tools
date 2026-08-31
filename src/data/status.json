@@ -1,32 +1,32 @@
 {
   "curahub": {
     "statusCode": 200,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "dmx-rustdesk-clients": {
     "statusCode": 404,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "hsbi-gpt": {
     "statusCode": 200,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "strata": {
     "statusCode": 200,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "video-wall": {
     "statusCode": 200,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "vvz": {
     "statusCode": null,
     "skipped": true,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   },
   "vvzauberer": {
     "statusCode": null,
     "skipped": true,
-    "checkedAt": "2026-08-29T17:36:37.507Z"
+    "checkedAt": "2026-08-31T15:52:56.961Z"
   }
 }
